@@ -118,28 +118,7 @@ def evaluate_model(train, test, predictions):
         'mae': mae
     }
 
-def plot_predictions(train, test, predictions, column='NBA'):
-    """
-    Plot the training, testing, and predicted values with improved visualization
-    """
-    plt.figure(figsize=(12, 6))
-    plt.plot(train[column], label='Train', color='blue')
-    plt.plot(test[column], label='Test', color='green')
-    plt.plot(predictions, label='Predicted', color='red', linestyle='--')
-    
-    # Add confidence intervals
-    conf_int = model.get_forecast(len(test)).conf_int()
-    plt.fill_between(test.index, 
-                    conf_int.iloc[:, 0], 
-                    conf_int.iloc[:, 1], 
-                    color='red', alpha=0.1)
-    
-    plt.title(f'SARIMA Prediction for {column}')
-    plt.xlabel('Date')
-    plt.ylabel('Popularity')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+# Plot function removed for web deployment - not needed for API
 
 def save_model(model, filename='basketball_sarima_model.pkl'):
     """
@@ -168,8 +147,6 @@ def main():
     print(f"RMSE: {metrics['rmse']:.2f}")
     print(f"MAE: {metrics['mae']:.2f}")
     
-    # Plot results
-    plot_predictions(train, test, predictions, 'NBA')
     save_model(model)
 
 if __name__ == "__main__":

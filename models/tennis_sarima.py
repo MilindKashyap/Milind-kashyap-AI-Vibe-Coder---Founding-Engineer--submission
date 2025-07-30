@@ -37,20 +37,7 @@ def predict_future(model, steps=6):
     forecast = model.forecast(steps=steps)
     return forecast
 
-def plot_predictions(train, test, predictions, column='NBA'):
-    """
-    Plot the training data, testing data, and predictions
-    """
-    plt.figure(figsize=(16, 8))
-    plt.plot(train[column], label='Train')
-    plt.plot(test[column], label='Test')
-    plt.plot(predictions, label='Predicted', color='red')
-    plt.title(f'SARIMA Prediction for Tennis (Placeholder)')
-    plt.xlabel('Date')
-    plt.ylabel('Popularity')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+# Plot function removed for web deployment - not needed for API
 
 def save_model(model, filename='tennis_sarima_model.pkl'):
     """
@@ -72,7 +59,6 @@ def main():
     model = train_tennis_sarima(train['NBA'])
     predictions = predict_future(model, steps=6)
     
-    plot_predictions(train, test, predictions, 'NBA')
     save_model(model)
 
 if __name__ == "__main__":
